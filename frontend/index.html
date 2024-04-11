@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        .container {
+            max-width: 500px; /* Limit form width */
+            margin: auto; /* Center align container */
+            padding-top: 50px; /* Add space at the top */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Add space between form fields */
+        }
+        .input-group-append {
+            margin-left: -1px; /* Adjust margin for the append button */
+        }
+        .btn-submit {
+            width: 100%; /* Make submit button full-width */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Fill your car details</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="number_plate">Number Plate:</label>
+                <input type="text" class="form-control" id="number_plate" placeholder="Enter number plate">
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input type="text" class="form-control" id="color" placeholder="Enter color">
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" class="form-control" id="model" placeholder="Enter model">
+            </div>
+            <div class="form-group">
+                <label for="image_path">Image:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="image_path" placeholder="Image path">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary">Browse</button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" onclick="submit_form()" class="btn btn-primary btn-submit">Submit</button>
+                                <script>
+                function submit_form() {
+                    var name = document.getElementById("name").value;
+                    var number_plate = document.getElementById("number_plate").value;
+                    var color = document.getElementById("color").value;
+                    var model = document.getElementById("model").value;
+                    var image_path = document.getElementById("image_path").value;
+                    console.log(name);
+                    // pyweb.submit_form(name, number_plate, color, model, image_path);
+                }
+            </script>
+        </form>
+    </div>
+</body>
+</html>
