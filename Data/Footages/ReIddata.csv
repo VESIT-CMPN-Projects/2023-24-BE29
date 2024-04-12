@@ -1,0 +1,12 @@
+,image_name,color,color_confidence,model,model_confidence,number_plate,np_similarity_score
+0,frame_0004_npd_0.jpeg,red,0.952083,wagonr,0.86670506,,0.0
+1,frame_0004_npd_5.jpeg,red,0.9905007,wagonr,0.6493424,,0.0
+2,frame_0005_npd_0.jpeg,red,0.73783237,wagonr,0.99963117,,0.0
+3,frame_0006_npd_6.jpeg,red,0.97270036,wagonr,0.99045837,,0.0
+4,frame_0007_npd_5.jpeg,red,0.9856608,wagonr,0.9851999,,0.0
+5,frame_0008_npd_3.jpeg,red,0.99781066,wagonr,0.9947345,VHA3BEI907,0.7
+6,frame_0012_npd_0.jpeg,red,0.9999713,wagonr,0.7175158,MH43BE1907,1.0
+7,frame_0013_npd_0.jpeg,red,0.8452225,wagonr,0.95451653,MH43BE1907,1.0
+8,frame_0015_npd_0.jpeg,red,0.9867166,wagonr,0.99932873,MH45BE1907,0.9
+9,frame_0016_npd_0.jpeg,red,0.99746084,wagonr,0.9376502,1H43BE907,0.8
+10,frame_0017_npd_0.jpeg,red,0.99948126,wagonr,0.8965501,E907,0.4
