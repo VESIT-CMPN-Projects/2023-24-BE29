@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, pyqtSignal, QSize, QUrl
 from PyQt5.QtGui import QIcon, QFont ,QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLineEdit, QLabel, QMessageBox, \
     QMainWindow, QHBoxLayout, QStackedWidget, QFormLayout, QTextEdit, QFileDialog, QSizePolicy
-from PyQt5.QtWebEngineWidgets import QWebEngineView,QWebEnginePage, QWebEngineProfile, QWebEngineSettings
+# from PyQt5.QtWebEngineWidgets import QWebEngineView,QWebEnginePage, QWebEngineProfile, QWebEngineSettings
 from PyQt5.QtCore import QObject
 # from PyQt5.QtWebEngineCore import QWebEngineUrlSchemeHandler
 # from PyQt5.QtWebEngineWidgets import QWebEngineUrlSchemeHandler

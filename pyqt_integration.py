@@ -14,6 +14,7 @@ import easyocr
 import numpy as np
 import pandas as pd
 from ultralytics import YOLO
+import os
 from PIL import Image
 
 # UI Imports
@@ -25,7 +26,7 @@ from frontend.Dashboard import DashboardPage
 from frontend.db import GetCarDetails
 
 # Flask
-from flask import Flask, render_template, redirect, request
+# from flask import Flask, render_template, redirect, request
 
 from werkzeug.utils import secure_filename
 # Create an instance of the GetCarDetails class
@@ -38,6 +39,9 @@ cmp = Car_model()
 color = Car_color()
 getcord = GetCoords()
 from tensorflow.keras.models import load_model
+# Trial 
+from keras.layers import TFSMLayer
+
 
 # Taking input from the UI
 # input_numplate = GetNumberPlate()
@@ -45,16 +49,21 @@ from tensorflow.keras.models import load_model
 path = 'Data/'
 # Car Model Predition Model
 car_model = 'Models/SW_Classification_EfficientNet'
-print('Initialized Car Model Prediction')
+# car_model = TFSMLayer('Models/SW_Classification_EfficientNet', call_endpoint='serving_default')
+# car_model = 'Models/SW_Classification_EfficientNet'
+
 # Car Color Prediction Model
 car_color_model = 'Models/Car_Color_model_4'
-print('Initialized Car Color Prediction')
+
 # This list is not exaustive
 model_names = ['swift', 'wagonr']
 color_list = ['black', 'blue','red','white']
 # Load the saved model
-car_model_efficientNet = load_model(car_model)
-car_color_efficientNet = load_model(car_color_model)
+# car_model_efficientNet = TFSMLayer('Models/SW_Classification_EfficientNet', call_endpoint='serving_default') 
+car_model_efficientNet = load_model(car_model,compile=False)
+print('Initialized Car Model Prediction')
+car_color_efficientNet = load_model(car_color_model,compile=False)
+print('Initialized Car Color Prediction')
 # Initialize easyOCR
 reader = easyocr.Reader(['en'])
 # Initialize Yolo model instance
@@ -65,11 +74,11 @@ print('Initialized YOLO for Object Detection')
 model_npd = torch.hub.load('ultralytics/yolov5', 'custom', path=npd_model_path)
 
 
-def execute_models(input_np,input_color,input_model):
+def execute_models():
 # Call the get_last_number_plate() method to retrieve the last number plate from the database
-    # input_np = car_det.get_last_number_plate()
-    # input_color = car_det.get_last_color()
-    # input_model = car_det.get_last_model()
+    input_np = car_det.get_last_number_plate()
+    input_color = car_det.get_last_color()
+    input_model = car_det.get_last_model()
     # Parameter inputs
     
     # Location of the input video
@@ -193,74 +202,20 @@ def execute_models(input_np,input_color,input_model):
     framesdata.to_csv("Data/Footages/ReIddata.csv")
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # UI 
-    # app = QApplication(sys.argv)
-    # # UI Pages Instances
-    # signup_page = SignUpPage()
-    # login_page = LoginPage()
-    # dashboard_page = DashboardPage()
+    app = QApplication(sys.argv)
+    # UI Pages Instances
+    signup_page = SignUpPage()
+    login_page = LoginPage()
+    dashboard_page = DashboardPage()
 
-    # signup_page.show_login_signal.connect(login_page.show)
-    # login_page.show_signup_signal.connect(signup_page.show)
-    # login_page.login_successful.connect(dashboard_page.show)
-    # dashboard_page.submit_from_signal.connect(execute_models) 
-    # login_page.show()
-    # # bc.execute_models
-    # sys.exit(app.exec_())
-
-
-# from utils.integrate import execute_models
-# from pymongo import MongoClient
-
-app = Flask(__name__)
-
-@app.route("/complainForm", methods=["POST", "GET"])
-def complain_form():
-    if request.method == "POST":
-        owner_name = request.form["ownerName"]
-        vehicle_no = request.form["registrationNo"]
-        vehicle_color = request.form["carColor"]
-        vehicle_model = request.form["carModel"]
-        vehicle_image = ""
-
-        try:
-            imageFile = request.files["carImage"]
-            if imageFile:
-                filename = secure_filename(imageFile.filename)
-                imageFile.save(
-                    os.path.join(
-                        "App/images",
-                        filename,
-                    )
-                )
-                print("file saved successfully")
-        except Exception as e:
-            print(e)
-
-        print(f"owner_name: {owner_name}")
-        print(f"vehicle_no: {vehicle_no}")
-        print(f"vehicle_color: {vehicle_color}")
-        print(f"vehicle_model: {vehicle_model}")
-        print(f"vehicle_image: {vehicle_image}")
-        execute_models(vehicle_no,vehicle_color,vehicle_model)
-        return redirect("/home")
-
-    else:
-        return redirect("/")
-
-
-@app.route("/home")
-def home():
-    return render_template("dashboard.html")
-
-
-@app.route("/")
-def hello_world():
-    return render_template("index.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    signup_page.show_login_signal.connect(login_page.show)
+    login_page.show_signup_signal.connect(signup_page.show)
+    login_page.login_successful.connect(dashboard_page.show)
+    dashboard_page.submit_from_signal.connect(execute_models) 
+    login_page.show()
+    # bc.execute_models
+    sys.exit(app.exec_())
 
 
